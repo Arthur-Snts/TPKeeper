@@ -21,7 +21,6 @@ class Mestre(db.Model, UserMixin):
 
 
     
-
 class Campanha(db.Model):
     __tablename__ = 'campanhas'
     id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
@@ -66,3 +65,4 @@ def init_db(app):
 
 
 
+# ola
