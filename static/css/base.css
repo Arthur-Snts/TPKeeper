@@ -1,9 +1,10 @@
 /* CSS Global */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Garamond', sans-serif;
 }
 
 body {
@@ -13,13 +14,22 @@ body {
 
 /* Navbar */
 .navbar {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     background-color: #111;
-    position: relative;
+    z-index: 1000;
 }
+
+#landing-page {
+    width:auto;
+    height: auto;
+    background-color: transparent;
+    border: none;
+}
+
 
 /* Linha Laranja abaixo da navbar */
 .navbar::after {
@@ -27,10 +37,11 @@ body {
     display: block;
     width: 100%;
     height: 3px;
-    background-color: #ff7300;
+    background-color: #ff914d;
     position: absolute;
     bottom: -3px;
     left: 0;
+    z-index: 4; /* Mantém a linha abaixo do menu do perfil */
 }
 
 /* Centralização correta dos botões */
@@ -52,12 +63,15 @@ body {
     font-size: 18px;
 }
 
-.nav-links:active {
-    color: #ff7300;
+.nav-links a:hover {
+    color: #ff8c00;
 }
 
-.nav-links a:hover {
-    color: orange;
+/* Ícone do perfil */
+.perfil {
+    position: relative;
+    cursor: pointer;
+    z-index: 6; /* Garante que o perfil esteja acima da navbar */
 }
 
 .perfil img {
@@ -65,6 +79,64 @@ body {
     height: 57.5px;
     border-radius: 50%;
 }
+
+/* Menu suspenso do perfil */
+.perfil-menu {
+    display: none;
+    position: absolute;
+    top: 65px;
+    right: 0;
+    background: #222;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    width: 150px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 10; /* O menu fica acima da navbar e da linha laranja */
+}
+
+.perfil-menu a,
+.perfil-menu button {
+    display: block;
+    padding: 12px 15px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.perfil-menu a {
+    width: auto;
+    height: auto;
+    padding: 0px;
+}
+
+/* Mostrar o menu quando ativo */
+.perfil-menu.active {
+    display: block;
+    
+}
+
+/* Botão de logout */
+.perfil-menu button {
+    background-color: #222; /* Fundo sólido */
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.perfil-menu button:hover {
+    background-color: #ff8c00; /* Um tom mais claro no hover */
+}
+
+/* Logo */
 .logo img {
     width: 102.4px;
     height: 57.5px;
@@ -73,13 +145,16 @@ body {
 /* Botões do topo */
 .buttons {
     margin: 20px 0;
+    width: auto;
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
 .tab {
-    background: #ff7300;
+    flex-shrink: 0;
+    max-width: 100%;
+    background: #f97625;
     border: none;
     padding: 15px 30px;
     font-size: 18px;
@@ -90,11 +165,11 @@ body {
 }
 
 .tab:hover {
-    background: #ff9100;
+    background: #ff8c00;
 }
 
 .tab.active {
-    background: #ff9100;
+    background: #ff8c00;
 }
 
 /* Linha Laranja abaixo do botão */
@@ -107,8 +182,121 @@ body {
 .btn-container::after {
     content: "";
     display: block;
-    width: 50%;  /* Ajuste para ficar proporcional ao botão */
+    width: 50%;
     height: 3px;
-    background-color: orange;
+    background-color: #ff914d;
     margin: 10px auto 0;
 }
+
+.flash {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    font-size: larger;
+    font-weight: bold;
+}
+.error {
+    color: #cc0000;
+}
+
+/* Para tablets e telas menores (máx. 768px) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 10px 20px;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+    .perfil {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .nav-center {
+        order: 3; /* Mantém os botões abaixo da logo e do perfil */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .nav-links {
+        gap: 50px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .perfil img {
+        width: 80px;
+        height: 45px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        margin-left: 80px;
+        margin-right: 80px;
+        gap: 15px;
+    }
+
+    .tab {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+
+    .btn-container::after {
+        width: 50%;
+    }
+}
+
+/* Para celulares pequenos (máx. 480px) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .logo img {
+        width: 80px;
+        height: 45px;
+    }
+
+    .perfil img {
+        width: 60px;
+        height: 35px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .perfil-menu {
+        width: 100px;
+        font-size: 14px;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+
+    .tab {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-container::after {
+        width: 50%;
+    }
+}
+
+
